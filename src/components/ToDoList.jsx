@@ -1,9 +1,23 @@
 import ToDoListButton from "./ToDoListButton";
 
-function ToDoList() {
+function ToDoList(props) {
+  props.task.sort((a, b) => b.id - a.id);
   return (
     <div className="wrapper">
       <ul>
+        {props.tasks.map((item) => {
+          return (
+            <li key={item.id}>
+              <div className="left">
+                <button>✅</button>
+              </div>
+              <div className="center">{item.task}</div>
+              <div className="right">
+                <ToDoListButton />
+              </div>
+            </li>
+          );
+        })}
         <li>
           <div className="left">
             <button>✅</button>

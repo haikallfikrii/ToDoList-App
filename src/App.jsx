@@ -5,7 +5,11 @@ import ToDoList from "./components/ToDoList";
 
 function App() {
   const newTask = useRef("");
-  const [tasks, setTask] = useState([]);
+  const [tasks, setTasks] = useState([]);
+  function setId() {
+    const jumlahTask = tasks.length;
+    return jumlahTask + 1;
+  }
   function addTask(event) {
     event.preventDefault();
     if (newTask.current.value == "") {
@@ -13,16 +17,17 @@ function App() {
       return false;
     }
     const data = {
-      id: 1,
+      id: setId(),
       task: newTask.current.value,
       completed: false,
     };
-    console.log(`saya diklik isi ${newTask.current.value}`);
+    newTask.current.value = "";
+    setTasks([...tasks, data]);
   }
   return (
     <>
       <Form addTask={addTask} newTask={newTask} />
-      <ToDoList />
+      <ToDoList tasks={tasks} />
     </>
   );
 }
