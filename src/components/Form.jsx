@@ -1,3 +1,7 @@
+// Form.jsx
+import React from "react";
+import PropTypes from "prop-types";
+
 function Form(props) {
   return (
     <div className="wrapper">
@@ -14,5 +18,10 @@ function Form(props) {
     </div>
   );
 }
+
+Form.propTypes = {
+  newTask: PropTypes.object.isRequired,
+  addTask: PropTypes.func.isRequired,
+};
 
 export default Form;

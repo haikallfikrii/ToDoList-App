@@ -1,41 +1,37 @@
 import ToDoListButton from "./ToDoListButton";
-
 function ToDoList(props) {
-  props.task.sort((a, b) => b.id - a.id);
+  props.tasks.sort((a, b) => b.id - a.id);
   return (
     <div className="wrapper">
       <ul>
         {props.tasks.map((item) => {
+          let radioCompleted = "";
+          let classCompleted = "";
+          if (item.completed == false) {
+            radioCompleted = "⬜";
+          } else {
+            radioCompleted = "✅";
+            classCompleted = "strike";
+          }
           return (
             <li key={item.id}>
               <div className="left">
-                <button>✅</button>
+                <button onClick={() => props.setCompleted(item.id)}>
+                  {radioCompleted}
+                </button>
               </div>
-              <div className="center">{item.task}</div>
+              <div className={`center ${classCompleted}`}>{item.task}</div>
               <div className="right">
-                <ToDoListButton />
+                <ToDoListButton
+                  id={item.id}
+                  tasks={props.tasks}
+                  move={props.move}
+                  remove={props.remove}
+                />
               </div>
             </li>
           );
         })}
-        <li>
-          <div className="left">
-            <button>✅</button>
-          </div>
-          <div className="center">bbb</div>
-          <div className="right">
-            <ToDoListButton />
-          </div>
-        </li>
-        <li>
-          <div className="left">
-            <button>◻️</button>
-          </div>
-          <div className="center">aaa</div>
-          <div className="right">
-            <ToDoListButton />
-          </div>
-        </li>
       </ul>
     </div>
   );
